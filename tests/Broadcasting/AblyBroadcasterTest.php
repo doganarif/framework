@@ -4,6 +4,7 @@ namespace Illuminate\Tests\Broadcasting;
 
 use Ably\AblyRest;
 use Illuminate\Broadcasting\Broadcasters\AblyBroadcaster;
+use Illuminate\Support\Facades\Facade;
 use Illuminate\Http\Request;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
@@ -25,6 +26,8 @@ class AblyBroadcasterTest extends TestCase
         $this->ably = m::mock(AblyRest::class, ['abcd:efgh']);
 
         $this->broadcaster = m::mock(AblyBroadcaster::class, [$this->ably])->makePartial();
+
+        Facade::setFacadeApplication(app());
     }
 
     protected function tearDown(): void

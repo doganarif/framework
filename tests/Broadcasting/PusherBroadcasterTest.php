@@ -3,6 +3,7 @@
 namespace Illuminate\Tests\Broadcasting;
 
 use Illuminate\Broadcasting\Broadcasters\PusherBroadcaster;
+use Illuminate\Support\Facades\Facade;
 use Illuminate\Http\Request;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
@@ -23,6 +24,8 @@ class PusherBroadcasterTest extends TestCase
 
         $this->pusher = m::mock('Pusher\Pusher');
         $this->broadcaster = m::mock(PusherBroadcaster::class, [$this->pusher])->makePartial();
+
+        Facade::setFacadeApplication(app());
     }
 
     public function testAuthCallValidAuthenticationResponseWithPrivateChannelWhenCallbackReturnTrue()

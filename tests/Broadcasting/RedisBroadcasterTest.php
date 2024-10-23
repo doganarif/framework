@@ -5,6 +5,7 @@ namespace Illuminate\Tests\Broadcasting;
 use Illuminate\Broadcasting\Broadcasters\RedisBroadcaster;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Container\Container;
+use Illuminate\Support\Facades\Facade;
 use Illuminate\Http\Request;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
@@ -27,6 +28,8 @@ class RedisBroadcasterTest extends TestCase
         $container->singleton('config', function () {
             return $this->createConfig();
         });
+
+        Facade::setFacadeApplication(app());
     }
 
     protected function tearDown(): void
